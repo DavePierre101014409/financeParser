@@ -22,3 +22,18 @@ cursor.close()
 cursor.connection.commit()
 
 db.close()
+
+def create_connection(db_name):
+    try:
+        con = sqlite3.connect(db_name)
+        return con
+
+    execept Error as e:
+        print(e)
+
+    return None
+
+def writeTranscation():
+    create_connection(nameOfDatabase)
+
+    sqlCommand= "INSERT INTO monthlyTransCation(name,price, date) VALUES('Walmart',12.99,'2018-08-01')"
