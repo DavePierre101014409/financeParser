@@ -43,3 +43,24 @@ def insertNewAnime(eng_title, jap_title, inserted_Date):
     values= (eng_title, jap_title, inserted_Date)
     con.execute('INSERT INTO anime(eng_title, jap_title ,inserted_date) VALUES(?,?,?)', values)
     con.commit()
+           
+def insertNewSeason(anime_id, season_number, name ,inserted_Date):
+    #Since id is a primarykey then it should be autogerneated 
+    con =create_connection(nameOfDatabase).cursor()
+    values= (anime_id, season_number, name ,inserted_Date)
+    con.execute('INSERT INTO season(anime_id, number ,name,inserted_date) VALUES(?,?,?r,?)', values)
+    con.commit()
+           
+def inserNewEpisode(anime_id, season_number, episode_number name , airDate, inserted_Date):
+    #Since id is a primarykey then it should be autogerneated 
+    con =create_connection(nameOfDatabase).cursor()
+    values=(anime_id, season_number, episode_number name , airDate, inserted_Date)
+    con.execute('INSERT INTO season(anime_id, season_number ,number,name,airdate,inserted_date) VALUES(?,?,?,?,?,?,?)', values)
+    con.commit()
+
+
+           
+           
+           
+           
+          
