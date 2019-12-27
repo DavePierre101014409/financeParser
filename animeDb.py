@@ -15,7 +15,6 @@ for name ,price , date in cursor:
     print(price)
     print(date)
 
-    print("-"*20)
 
 cursor.close()
 cursor.connection.commit()
@@ -33,7 +32,8 @@ def create_connection(db_name):
     return None
 
 def insertNewAnime(eng_title, jap_title, inserted_Date):
+    #Since id is a primarykey then it should be autogerneated 
     con =create_connection(nameOfDatabase).cursor()
     values= (eng_title, jap_title, inserted_Date)
-    con.execute('INSERT INTO anime(id, eng_title, jap_title ,inserted_date) VALUES(?,?,?,?)', values)
+    con.execute('INSERT INTO anime(eng_title, jap_title ,inserted_date) VALUES(?,?,?)', values)
     con.commit()
