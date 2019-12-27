@@ -4,23 +4,27 @@ import sqlite3
 
 nameOfDatabase = "animeTracker.sqlite"
 db = sqlite3.connect(nameOfDatabase)
+db.execute("CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)")
 db.execute("CREATE TABLE IF NOT EXISTS anime(id INTEGER PRIMARY KEY AUTOINCREMENT, eng_title TEXT,jap_title TEXT, inserted_date TEXT)")
 db.execute("CREATE TABLE IF NOT EXISTS season(anime_id INTEGER PRIMARY KEY,number INTEGER PRIMARY KEY,name TEXT, totalEpsiodes Integer, inserted_date TEXT,
                                                FOREIGN KEY(anime_id)REFERENCES anime(id) )")
-db.execute("CREATE TABLE IF NOT EXISTS epsiodes(anime_id INTEGER PRIMARY KEY,season_number INTEGER PRIMARY KEY,number INTEGER PRIMARY KEY,name TEXT,airDate TEXT, inserted_date TEXT,
+db.execute("CREATE TABLE IF NOT EXISTS episodes(anime_id INTEGER PRIMARY KEY,season_number INTEGER PRIMARY KEY,number INTEGER PRIMARY KEY,name TEXT,airDate TEXT, inserted_date TEXT,
                                                FOREIGN KEY(anime_id)REFERENCES season(anime_id),
                                                FOREIGN KEY(season_number)REFERENCES season(number)")
+           
+ db.execute("CREATE TABLE IF NOT EXISTS watched(anime_id INTEGER PRIMARY KEY,season_number INTEGER PRIMARY KEY,episode_number INTEGER PRIMARY KEY,user_id PRIMARY KEY INTEGER, 
+                                               FOREIGN KEY(anime_id)REFERENCES season(anime_id),
+                                               FOREIGN KEY(season_number)REFERENCES season(number),
+                                               FOREIGN KEY(episode_number)REFERENCES episodes(number),
+                                               FOREIGN KEY(user_id)REFERENCES user(id)")"
+ db.execute("CREATE TABLE IF NOT EXISTS would_watched(anime_id INTEGER PRIMARY KEY,season_number INTEGER PRIMARY KEY,use0r_id PRIMARY KEY INTEGER,
+                                               FOREIGN KEY(anime_id)REFERENCES season(anime_id),
+                                               FOREIGN KEY(season_number)REFERENCES season(number),
+                                               FOREIGN KEY(user_id)REFERENCES user(id)")"
+
 
 
 #
-cursor = db.cursor()
-cursor.execute("SELECT * FROM monthlyTransCation")
-
-for name ,price , date in cursor:
-    print(name)
-    print(price)
-    print(date)
-
 
 cursor.close()
 cursor.connection.commit()
