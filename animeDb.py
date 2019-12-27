@@ -4,7 +4,13 @@ import sqlite3
 
 nameOfDatabase = "animeTracker.sqlite"
 db = sqlite3.connect(nameOfDatabase)
-db.execute("CREATE TABLE IF NOT EXISTS anime(id INTEGER PRIMARY KEY, eng_title TEXT,jap_title TEXT, inserted_date TEXT)")
+db.execute("CREATE TABLE IF NOT EXISTS anime(id INTEGER PRIMARY KEY AUTOINCREMENT, eng_title TEXT,jap_title TEXT, inserted_date TEXT)")
+db.execute("CREATE TABLE IF NOT EXISTS season(anime_id INTEGER PRIMARY KEY,number INTEGER PRIMARY KEY,name TEXT, totalEpsiodes Integer, inserted_date TEXT,
+                                               FOREIGN KEY(anime_id)REFERENCES anime(id) )")
+db.execute("CREATE TABLE IF NOT EXISTS epsiodes(anime_id INTEGER PRIMARY KEY,season_number INTEGER PRIMARY KEY,number INTEGER PRIMARY KEY,name TEXT, inserted_date TEXT,
+                                               FOREIGN KEY(anime_id)REFERENCES season(anime_id),
+                                               FOREIGN KEY(season_number)REFERENCES season(number)")
+
 
 #
 cursor = db.cursor()
