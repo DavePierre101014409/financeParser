@@ -38,3 +38,10 @@ for i in rows:
 
 def find_date(string):
     years= ['2019','2020']
+    
+    for year in years:
+        index=string.find(year)
+        if(index != -1):
+            parserDate = slice(index,index+10)
+            date=string[parserDate]
+            return date
