@@ -6,8 +6,7 @@ nameOfDatabase = "animeTracker.sqlite"
 db = sqlite3.connect(nameOfDatabase)
 
 def create_table():
-  db=create_connection(db_name)
-  db = db.cursor()
+  db=create_connection(db_name).cursor()
   db.execute("CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)")
   db.execute("CREATE TABLE IF NOT EXISTS anime(id INTEGER PRIMARY KEY AUTOINCREMENT, eng_title TEXT,jap_title TEXT, inserted_date TEXT)")
   db.execute("CREATE TABLE IF NOT EXISTS season(anime_id INTEGER PRIMARY KEY,number INTEGER PRIMARY KEY,name TEXT, totalEpsiodes Integer, inserted_date TEXT,
