@@ -84,8 +84,7 @@ def insertWatched(anime_id, season_number, episode_number ,user_id):
     con.execute('INSERT INTO watched(anime_id, season_number, episode_number ,user_id)VALUES(?,?,?,?)', values)
     con.commit()
     con.close()
-           
-           
+ 
            
            
           
